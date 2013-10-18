@@ -21,11 +21,11 @@ Currently this is just a single-user application and you need to have Scala and 
 
 To install, either download the zip file for this project or clone it with git:
 
-git clone git://github.com/oranda/libanius-play
+    git clone git://github.com/oranda/libanius-play
 
 Then cd to the libanius-play directory and run it:
 
-play run
+    play run
 
 Then just open your browser at http://localhost:9000/
 
