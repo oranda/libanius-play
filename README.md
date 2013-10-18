@@ -17,7 +17,7 @@ James McCabe <james@oranda.com>
 Install
 =======
 
-Currently this is just a single-user application and you need to have Scala and the Play Framework installed on your PC to get this to work. It has been tested with Play 2.2, and browsers Chrome 17, and Firefox 20. 
+Currently this is just a single-user application and you need to have Scala and the Play Framework installed on your PC to get this to work. It has been tested with Play 2.2, sbt 0.13, and browsers Chrome 17, and Firefox 20. 
 
 To install, either download the zip file for this project or clone it with git:
 
