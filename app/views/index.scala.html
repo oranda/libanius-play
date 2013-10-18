@@ -1,0 +1,47 @@
+@(data: DataToClient)
+
+@import helper._
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+    <script type="text/javascript" src="@routes.QuizScreenController.javascriptRoutes"></script>
+
+    <script type='text/javascript' src='@routes.Assets.at("javascripts/index.js")'></script>
+
+    <link rel="stylesheet" type="text/css" href='@routes.Assets.at("stylesheets/main.css")'/>
+</head>
+
+<body>
+    <div class="center">
+        <span id="header-wrapper">
+            <span class="alignleft" id="score-text">Score: @data.score</span>
+            <span class="alignright"><button id="delete-button">DEL</button></span>
+        </span>
+        <input type="hidden" id="prompt-type" value='@data.promptType'/>
+        <span id="prompt-word">@data.prompt</span>
+        <p>What is the <span id="response-type">@data.responseType</span>?
+            <span id="num-correct-responses">(correctly answered @data.numCorrectResponsesInARow times)</span></p>
+        <br/>
+        <input type="hidden" id="correct-response" value='@data.correctResponse'/>
+        <input type="button" class="response-choice-button" id="response-choice-1" value='@data.choices(0)'/><p/>
+        <input type="button" class="response-choice-button" id="response-choice-2" value='@data.choices(1)'/><p/>
+        <input type="button" class="response-choice-button" id="response-choice-3" value='@data.choices(2)'/><p/>
+
+        <span id="footer-wrapper">
+            <span class="alignleft">PREV: <span id="prev-prompt">@data.prevPrompt</span></span>
+            <span class="alignright">
+                <span class="alignleft" id="prev-choice-1">@data.prevChoices(0)</span><br/>
+                <span class="alignleft" id="prev-choice-2">@data.prevChoices(1)</span><br/>
+                <span class="alignleft" id="prev-choice-3">@data.prevChoices(2)</span><br/>
+            </span>
+        </span>
+    </div>
+
+    <P class="status-text"></P>
+
+</body>
+</html>
+
+
