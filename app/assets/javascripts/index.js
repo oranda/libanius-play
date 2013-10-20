@@ -25,22 +25,22 @@ $(function() {
 
 function submitAnswer(selectedButton)
 {
+    resetPrevChoiceLabels()
+
+    correctResponse = $("#correct-response").val()
+    setColorsOnResponse(correctResponse, selectedButton)
+
     promptType = $("#prompt-type").val()
     responseType = $("#response-type").text()
     prompt = $("#prompt-word").text()
 
-    correctResponse = $("#correct-response").val()
-
     choice1 = $("#response-choice-1").val()
     choice2 = $("#response-choice-2").val()
     choice3 = $("#response-choice-3").val()
-    selectedChoice = selectedButton.value
-
-    setColorsOnResponse(correctResponse, selectedButton)
 
     jsRoutes.controllers.QuizScreenController.processUserAnswer().ajax({
         url: '/processUserAnswer',
-        data: "response=" + selectedChoice +
+        data: "response=" + selectedButton.value +
             "&promptType=" + promptType + "&responseType=" + responseType +
             "&prompt=" + prompt + "&correctResponse=" + correctResponse +
             "&responseChoice1=" + choice1 + "&responseChoice2=" + choice2 +
@@ -78,27 +78,57 @@ function removeCurrentWord()
 
 function setColorsOnResponse(correctResponse, selectedButton)
 {
-    selectedChoice = selectedButton.value
     $('.response-choice-button').each(function(i, responseChoiceButton) {
-        responseChoice = responseChoiceButton.value
-        if (responseChoice == correctResponse)
-            responseChoiceButton.classList.add('correct-response')
-        else if (responseChoice == selectedChoice)
-            responseChoiceButton.classList.add('incorrect-response')
+        prevChoiceLabel = document.querySelectorAll('.prev-choice')[i]
+        setColors(correctResponse, selectedButton, responseChoiceButton, prevChoiceLabel)
     })
 }
 
-function clearButtonColors()
+function resetPrevChoiceLabels()
+{
+    $('.prev-choice').each(function(i, label) {
+       $(label).text("")
+       resetColors(label)
+    })
+}
+
+function setColors(correctResponse, selectedButton, responseChoiceButton, prevChoiceLabel)
+{
+    responseChoice = responseChoiceButton.value
+    selectedChoice = selectedButton.value
+
+    if (responseChoice == correctResponse)
+        setColorCorrect(new Array(responseChoiceButton, prevChoiceLabel))
+    else if (responseChoice == selectedChoice)
+        setColorIncorrect(new Array(responseChoiceButton, prevChoiceLabel))
+}
+
+function setColorCorrect(elems)
+{
+    jQuery.each(elems, function(i, elem) { elem.classList.add('correct-response') })
+}
+
+function setColorIncorrect(elems)
+{
+    jQuery.each(elems, function(i, elem) { elem.classList.add('incorrect-response') })
+}
+
+function resetButtonAndLabelColors()
 {
     $('.response-choice-button').each(function(i, button) {
-        button.classList.remove('correct-response')
-        button.classList.remove('incorrect-response')
+        resetColors(button)
     })
+}
+
+function resetColors(elem)
+{
+    elem.classList.remove('correct-response')
+    elem.classList.remove('incorrect-response')
 }
 
 function loadNewQuizItem(data)
 {
-    clearButtonColors()
+    resetButtonAndLabelColors()
 
     $("#prompt-word").text(data.prompt)
     $("#response-type").text(data.responseType)
