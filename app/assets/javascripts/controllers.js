@@ -21,8 +21,6 @@
 angular.module('libanius-play.controllers', ['libanius-play.services', 'widgets.buttons',
         'widgets.common', 'widgets.labels']).
     controller('QuizCtrl', function ($scope, $http, $location, services, buttons, labels) {
-        console.log("Inside QuizCtrl")
-
         // Define what happens in the view when the initial load of data returns from the server
         $scope.initialLoad = function() {
             services.initialLoad().then(function(freshQuizData) {
@@ -34,7 +32,6 @@ angular.module('libanius-play.controllers', ['libanius-play.services', 'widgets.
         // Define what happens in the view when the post of a user response returns from the server
         $scope.processUserResponse = function(response) {
             services.processUserResponse($scope.quizData, response).then(function(freshQuizData) {
-                console.log("prompt: " + freshQuizData.data.prompt)
                 if (typeof freshQuizData.data.prompt == "undefined") {
                     window.location = "/finish";
                 } else {
