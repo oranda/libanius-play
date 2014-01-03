@@ -16,18 +16,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.oranda.libanius.mobile.dependencies
+'use strict';
 
-import play.api.Logger
-import com.oranda.libanius.dependencies.{Logger => LibaniusLogger}
-
-class LoggerPlay extends LibaniusLogger {
-
-  override def logImpl(message: String, module: String = "Libanius", t: Option[Throwable] = None) {
-    Logger("application").error("LoggerPlay logImpl called")
-    t match {
-      case Some(t) => Logger("application").error(module + ": " + message, t)
-      case _ => Logger("application").debug(module + ": " + message)
-    }
-  }
-}
+angular.module('libanius-play', ['libanius-play.services', 'libanius-play.controllers']);

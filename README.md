@@ -39,6 +39,7 @@ Screenshots
 License
 =======
 
-The application is licenced under the Apache License, Version 2.0.
+Most Libanius-Play source files are made available under the terms of the GNU Affero General Public License (AGPL).
+See individual files for details.
 
 Attribution info is in [SOURCES](SOURCES.md).
